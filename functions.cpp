@@ -54,9 +54,10 @@ void fatalidades()  {
 
 
 void interface() {
-  std::cout << "Selecione a funcao que deseja realizar:\n" << std::endl;
-  std::cout << "1: Cadastrar voo" << std::endl;
-  std::cout << "2: Cadastrar astronauta" << std::endl;
-  std::cout << "3: Adicionar astronauta em um voo" << std::endl;
-  std::cout << "4: Remover astronauta de um voo" << std::endl;
+  std::cout << "\nSelecione a funcao que deseja realizar:\n" << std::endl;
+  std::cout << "[1]: Cadastrar voo" << std::endl;
+  std::cout << "[2]: Cadastrar astronauta" << std::endl;
+  std::cout << "[3]: Adicionar astronauta em um voo" << std::endl;
+  std::cout << "[4]: Remover astronauta de um voo" << std::endl;
+  std::cout << "\n[0]: Sair" << std::endl;
 }

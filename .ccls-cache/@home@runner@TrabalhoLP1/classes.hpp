@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 
+// Classe Astronauta
 class Astronauta {
 
   // Parâmetros
@@ -13,7 +14,7 @@ class Astronauta {
     std::string nome;
     int idade;
     bool alive, disponivel;
-    std::vector<int> listaVoos;
+    std::vector <int> listaVoos;
 
   // Métodos
   public:
@@ -21,9 +22,11 @@ class Astronauta {
     Astronauta(std::string CPF, std::string nome, int idade);
     ~Astronauta();
     std::string getCPF();
+    void morrer();
     void adicionarVoo(int codigo);
 };
 
+// Classe Voo
 class Voo {
 
   // Parâmetros
@@ -36,17 +39,24 @@ class Voo {
   // Métodos
   public:
     Voo();
+    Voo(int codigo);
+    ~Voo();
     void adicionarPassageiro(Astronauta* tripulante);
     void explodir();
     int getCodigo();
 };
 
+//Classe Gerenciador
 class Gerenciador  {
 
   // Parâmetros
   private:
-    std::map <int, Voo*> voos;
-    
+    std::map <int, Voo*> viagens;
+
+  public:
+    Gerenciador();
+    ~Gerenciador();
+    void cadastrarVoo();
 };
 
 #endif
