@@ -1,26 +1,23 @@
-all: main
-
 CXX = clang++
 override CXXFLAGS += -g -Wmost -Werror -Wall -fsanitize=address
 
-SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.o' -print | sed -e 's/ /\\ /g')
-HEADERS = $(classes.hpp functions.hpp)
+SRCS = classes.o functions.o main.o
+HEADERS = classes.hpp functions.hpp
 
-classes.o: $(HEADERS)
-	$(CXX) $(CXXFLAGS) classes.cpp -c
+classes.o: $(HEADERS) classes.cpp
+	$(CXX) $(CXXFLAGS) classes.cpp -c "$@"
 
-functions.o: $(HEADERS)
-	$(CXX) $(CXXFLAGS) functions.cpp -c
+functions.o: $(HEADERS) functions.cpp
+	$(CXX) $(CXXFLAGS) functions.cpp -c "$@"
 
-main.o: $(HEADERS)
-	$(CXX) $(CXXFLAGS) main.cpp -c
+main.o: $(HEADERS) main.cpp
+	$(CXX) $(CXXFLAGS) main.cpp -c "$@"
 
-main: $(SRCS) $(HEADERS)
+projeto: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@"
-	rm *.o
 
-main-debug: $(SRCS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) -U_FORTIFY_SOURCE -O0 functions.cpp classes.cpp main.cpp -o "$@"
+projeto-debug: $(SRCS) $(HEADERS)
+	$(CXX) $(CXXFLAGS) -U_FORTIFY_SOURCE -O0 $(SRCS) -o "$@"
 
 clean:
-	rm -f main main-debug
+	rm -f projeto projeto-debug

@@ -32,6 +32,6 @@
 *.app
 
 # Test
-test.exe
-tests.cpp
-teste.exe
+test
+tests
+teste
