@@ -11,7 +11,7 @@
 // Construtor padrão de Astronauta
 Astronauta::Astronauta() {
   this->CPF = gerarCPF();
-  //this->nome = gerarNome();
+  this->nome = "Filipe Campos";
   this->idade = 20 + rand() % 80;
   this->alive = true;
   this->disponivel = true;
@@ -38,10 +38,22 @@ std::string Astronauta::getCPF() {
   return this->CPF; 
 }
 
+// Get nome
+std::string Astronauta::getNome()  {
+  return this->nome;
+}
+
+// Get idade
+int Astronauta::getIdade() {
+  return this->idade;
+}
+
+// Função para matar o astronauta
 void Astronauta::morrer()  {
   this->alive = false;
 }
 
+// Função para adicionar um voo ao histórico de voos do astronauta
 void Astronauta::adicionarVoo(int codigo)  {
   this->listaVoos.push_back(codigo);
 }
@@ -80,12 +92,12 @@ Voo::~Voo()  {
   this->passageiros.clear();
 }
 
-// Método adicionarPassageiros
+// Método para adicionar astronautas em um voo
 void Voo::adicionarPassageiro(Astronauta *tripulante)  {
   this->passageiros.insert({tripulante->getCPF(), tripulante});
 }
 
-// Método explodir
+// Método para explodir um voo
 void Voo::explodir()  {
   this->disponivel = false;
 
@@ -108,26 +120,45 @@ int Voo::getCodigo()  {
 // Construtor padrão de Gerenciador
 Gerenciador::Gerenciador()  {
   this->viagens = std::map <int, Voo*>();
+  this->viajantes = std::map <std::string, Astronauta*>();
 }
 
-// Método cadastrarVoo
-void Gerenciador::cadastrarVoo()  {
-
-  Voo *voo = new Voo();
+// Método para cadastrar um novo voo
+void Gerenciador::cadastrarVoo(Voo *voo)  {
   
   this->viagens.insert({voo->getCodigo(), voo});
   
-  std::cout << "\033[32;1mVoo cadastrado com sucesso!\033[m" << std::endl;
+  std::cout << "\n\033[32;1mVoo cadastrado com sucesso!\033[m" << std::endl;
   std::cout << "\033[34;1mCódigo de voo:\033[m " << voo->getCodigo() << std::endl;
+}
+
+// Método para cadastrar um novo astronauta
+void Gerenciador::cadastrarAstronauta(Astronauta *astronauta)  {
+
+  this->viajantes.insert({astronauta->getCPF(), astronauta});
+
+  std::cout << "\n\033[32;1mAstronauta cadastrado com sucesso!\033[m" << std::endl;
+  std::cout << "\033[34;1mCPF do astronauta:\033[m " << astronauta->getCPF() << std::endl;
+  std::cout << "\033[34;1mNome do astronauta:\033[m " << astronauta->getNome() << std::endl;
+  std::cout << "\033[34;1mIdade do astronauta:\033[m " << astronauta->getIdade() << std::endl;
 }
 
 // Destrutor de Gerenciador
 Gerenciador::~Gerenciador()  {
-  std::map<int, Voo*>::iterator it;
+  
+  std::map<int, Voo*>::iterator it1;
 
-  for (it = this->viagens.begin(); it != this->viagens.end(); it++)  {
-    delete it->second;
+  for (it1 = this->viagens.begin(); it1 != this->viagens.end(); it1++)  {
+    delete it1->second;
+  }
+  
+  this->viagens.clear();
+  
+  std::map<std::string, Astronauta*>::iterator it2;
+
+  for (it2 = this->viajantes.begin(); it2 != this->viajantes.end(); it2++)  {
+    delete it2->second;
   }
 
-  this->viagens.clear();
+  this->viajantes.clear();
 }

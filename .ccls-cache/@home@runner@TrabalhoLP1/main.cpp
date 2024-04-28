@@ -5,7 +5,6 @@
 int main(void) {
 
   int option;
-  char confirmacao;
   Gerenciador gerenciador;
 
   std::cout << ".    _     *       \\|/   .       .      -*-              +" << std::endl;
@@ -26,17 +25,46 @@ int main(void) {
     [3]: Adicionar astronauta em um voo
     [4]: Remover astronauta de um voo
     [0]: Sair*/
+    option = -1;
     std::cin >> option;
     
     switch (option)  {
       case 1:
         {
-          gerenciador.cadastrarVoo();
+          Voo *voo = new Voo();
+          gerenciador.cadastrarVoo(voo);
         }
         break;
       
       case 2:
-        {/*Cadastrar astronauta*/}
+        {
+          int escolha;
+          std::cout << "\nDeseja definir os parametros do astronauta ou utilizar um astronauta aleatorio?\n" << std::endl;
+          std::cout << "[1] Passar parametros" << std::endl;
+          std::cout << "[2] Astronauta aleatorio" << std::endl;
+          std::cin >> escolha;
+
+          if (escolha == 1)  {
+            std::string CPF, nome;
+            int idade;
+            std::cout << "Digite o CPF do astronauta: ";
+            std::cin >> CPF;
+            std::cout << "Digite o nome do astronauta: ";
+            std::getline(std::cin >> std::ws, nome);
+            std::cout << "Digite a idade do astronauta: ";
+            std::cin >> idade;
+
+            Astronauta *astronauta = new Astronauta(CPF, nome, idade);
+            gerenciador.cadastrarAstronauta(astronauta);
+          }
+          else if (escolha == 2)  {
+            Astronauta *astronauta = new Astronauta();
+            gerenciador.cadastrarAstronauta(astronauta);
+          }
+          else  {
+            std::cout << "\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
+          }
+        }
         break;
       
       case 3:
@@ -49,6 +77,8 @@ int main(void) {
       
       case 0:
         {
+          char confirmacao;
+          
           std::cout << "Tem certeza que deseja sair? (S/N)" << std::endl;
           std::cin >> confirmacao;
           

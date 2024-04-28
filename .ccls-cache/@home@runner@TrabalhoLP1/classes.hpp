@@ -22,6 +22,8 @@ class Astronauta {
     Astronauta(std::string CPF, std::string nome, int idade);
     ~Astronauta();
     std::string getCPF();
+    std::string getNome();
+    int getIdade();
     void morrer();
     void adicionarVoo(int codigo);
 };
@@ -52,11 +54,13 @@ class Gerenciador  {
   // Parâmetros
   private:
     std::map <int, Voo*> viagens;
+    std::map <std::string, Astronauta*> viajantes;
 
   public:
     Gerenciador();
     ~Gerenciador();
-    void cadastrarVoo();
+    void cadastrarVoo(Voo *voo);
+    void cadastrarAstronauta(Astronauta *astronauta);
 };
 
 #endif
