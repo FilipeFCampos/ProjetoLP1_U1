@@ -1,5 +1,5 @@
-#ifndef HEADER_H
-#define HEADER_H
+#ifndef CLASSES_HPP
+#define CLASSES_HPP
 
 #include <map>
 #include <vector>
@@ -9,7 +9,7 @@
 class Astronauta {
 
   // Parâmetros
-  protected:
+  private:
     std::string CPF;
     std::string nome;
     int idade;
@@ -18,13 +18,19 @@ class Astronauta {
 
   // Métodos
   public:
+    // Construtores e destrutores
     Astronauta();
     Astronauta(std::string CPF, std::string nome, int idade);
     ~Astronauta();
+    // Getters
     std::string getCPF();
     std::string getNome();
     int getIdade();
+    bool getAlive();
+    bool getDisponivel();
+    // Outros
     void morrer();
+    void toggleDisponivel();
     void adicionarVoo(int codigo);
 };
 
@@ -40,12 +46,16 @@ class Voo {
 
   // Métodos
   public:
+    // Construtores e destrutores
     Voo();
     Voo(int codigo);
     ~Voo();
+    // Getters
+    bool getDisponivel();
+    int getCodigo();
+    // Outros
     void adicionarPassageiro(Astronauta* tripulante);
     void explodir();
-    int getCodigo();
 };
 
 //Classe Gerenciador
@@ -57,10 +67,16 @@ class Gerenciador  {
     std::map <std::string, Astronauta*> viajantes;
 
   public:
+    // Construtores e destrutores
     Gerenciador();
     ~Gerenciador();
+    // Getters
+    int getQtdViagens();
+    int getQtdViajantes();
+    // Outros
     void cadastrarVoo(Voo *voo);
-    void cadastrarAstronauta(Astronauta *astronauta);
+    int cadastrarAstronauta(Astronauta *astronauta);
+    void adicionarTripulante(std::string CPF, int codigo);
 };
 
 #endif

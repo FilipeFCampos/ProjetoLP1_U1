@@ -25,23 +25,30 @@ int main(void) {
     [3]: Adicionar astronauta em um voo
     [4]: Remover astronauta de um voo
     [0]: Sair*/
+
     option = -1;
+    /*Eu defini o option como -1 aqui só para caso haja um erro e o 
+      std::cin não funcione, o código não comece a alocar novos voos
+      ou astronautas em loop por acidente e sim dê erro de opção inválida*/
     std::cin >> option;
     
     switch (option)  {
+      
+      // Cadastrar voo
       case 1:
         {
           Voo *voo = new Voo();
           gerenciador.cadastrarVoo(voo);
         }
         break;
-      
+
+      // Cadastrar astronauta
       case 2:
         {
           int escolha;
-          std::cout << "\nDeseja definir os parametros do astronauta ou utilizar um astronauta aleatorio?\n" << std::endl;
+          std::cout << "\nDeseja definir os parametros do astronauta ou gerar um astronauta aleatorio?\n" << std::endl;
           std::cout << "[1] Passar parametros" << std::endl;
-          std::cout << "[2] Astronauta aleatorio" << std::endl;
+          std::cout << "[2] Gerar astronauta aleatorio" << std::endl;
           std::cin >> escolha;
 
           if (escolha == 1)  {
@@ -66,15 +73,33 @@ int main(void) {
           }
         }
         break;
-      
+
+      // Castrar astronauta em um voo
       case 3:
-        {/*Adicionar astronauta em um voo*/}
+        {
+          if (gerenciador.getQtdViagens() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha voos cadastrados.\033[m" << std::endl;
+          }
+          else if (gerenciador.getQtdViajantes() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha astronautas cadastrados.\033[m" << std::endl;
+          }
+          else {
+            std::string cpf;
+            int codigo;
+            std::cout << "Por favor digite o CPF do astronauta que deseja adicionar:" << std::endl;
+            std::cin >> cpf;
+            std::cout << "Por favor digite o codigo do voo que deseja atribuir:" << std::endl;
+            std::cin >> codigo;
+            gerenciador.adicionarTripulante(cpf, codigo);
+          }
+        }
         break;
-      
+
       case 4:
         {/*Remover astronauta de um voo*/}
         break;
-      
+
+      // Sair
       case 0:
         {
           char confirmacao;
@@ -90,14 +115,15 @@ int main(void) {
             std::cout << "\nVoltando ao menu principal...\n" << std::endl;
           }
           else {
-            std::cout << "\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
+            std::cout << "\n\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
           }
         }
         break;
-      
+
+      // Opção inválida
       default:
         {
-          std::cout << "\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
+          std::cout << "\n\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
         }
         break;
     }

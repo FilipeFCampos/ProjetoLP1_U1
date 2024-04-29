@@ -1,5 +1,5 @@
 CXX = clang++
-override CXXFLAGS += -g -Wmost -Werror -Wall -fsanitize=address
+override CXXFLAGS += -g -Wall -pedantic -fsanitize=address
 
 SRCS = classes.o functions.o main.o
 HEADERS = classes.hpp functions.hpp
