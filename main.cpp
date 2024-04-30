@@ -24,6 +24,11 @@ int main(void) {
     [2]: Cadastrar astronauta
     [3]: Adicionar astronauta em um voo
     [4]: Remover astronauta de um voo
+    [5]: Lançar um voo
+    [6]: Explodir voo
+    [7]: Finalizar um voo
+    [8]: Listar todos os voos
+    [9]: Listar fatalidades
     [0]: Sair*/
 
     option = -1;
@@ -86,19 +91,56 @@ int main(void) {
           else {
             std::string cpf;
             int codigo;
-            std::cout << "Por favor digite o CPF do astronauta que deseja adicionar:" << std::endl;
+            std::cout << "Digite o CPF do astronauta que deseja adicionar: ";
             std::cin >> cpf;
-            std::cout << "Por favor digite o codigo do voo que deseja atribuir:" << std::endl;
+            std::cout << "Digite o codigo do voo que deseja atribuir: ";
             std::cin >> codigo;
             gerenciador.adicionarTripulante(cpf, codigo);
           }
         }
         break;
 
+      // Remover astronauta de um voo
       case 4:
-        {/*Remover astronauta de um voo*/}
+        {
+          if (gerenciador.getQtdViagens() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha voos cadastrados.\033[m" << std::endl;
+          }
+          else if (gerenciador.getQtdViajantes() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha astronautas cadastrados.\033[m" << std::endl;
+          }
+          else {
+            std::string cpf;
+            int codigo;
+            std::cout << "Digite o CPF do astronauta que deseja remover: ";
+            std::cin >> cpf;
+            std::cout << "Digite o codigo do voo do qual deseja remover: ";
+            std::cin >> codigo;
+            gerenciador.removerTripulante(cpf, codigo);
+          }
+        }
         break;
 
+      case 5:
+        {/*Lançar um voo*/}
+        break;
+
+      case 6:
+        {/*Explodir voo*/}
+        break;
+
+      case 7:
+        {/*Finalizar um voo*/}
+        break;
+
+      case 8:
+        {/*Listar todos os voos*/}
+        break;
+
+      case 9:
+        {/*Listar fatalidades*/}
+        break;
+      
       // Sair
       case 0:
         {

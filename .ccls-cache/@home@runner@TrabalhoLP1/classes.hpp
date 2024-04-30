@@ -55,7 +55,9 @@ class Voo {
     int getCodigo();
     // Outros
     void adicionarPassageiro(Astronauta* tripulante);
+    void removerPassageiro(std::string cpf);
     void explodir();
+    int checkPassageiros(std::string CPF);
 };
 
 //Classe Gerenciador
@@ -66,6 +68,7 @@ class Gerenciador  {
     std::map <int, Voo*> viagens;
     std::map <std::string, Astronauta*> viajantes;
 
+  // Métodos
   public:
     // Construtores e destrutores
     Gerenciador();
@@ -77,6 +80,7 @@ class Gerenciador  {
     void cadastrarVoo(Voo *voo);
     int cadastrarAstronauta(Astronauta *astronauta);
     void adicionarTripulante(std::string CPF, int codigo);
+    void removerTripulante(std::string cpf, int codigo);
 };
 
 #endif

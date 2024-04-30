@@ -112,6 +112,11 @@ void Voo::adicionarPassageiro(Astronauta *tripulante)  {
   this->passageiros.insert({tripulante->getCPF(), tripulante});
 }
 
+// Método para remover astronautas de um voo
+void Voo::removerPassageiro(std::string cpf)  {
+  this->passageiros.erase(cpf);
+}
+
 // Método para explodir um voo
 void Voo::explodir()  {
   this->disponivel = false;
@@ -121,6 +126,11 @@ void Voo::explodir()  {
   for (it = this->passageiros.begin(); it != this->passageiros.end(); it++)  {
     it->second->morrer();
   }
+}
+
+// Método para verificar se um passageiro faz parte do voo
+int Voo::checkPassageiros(std::string CPF)  {
+  return this->passageiros.count(CPF);
 }
 
 // Get codigo
@@ -211,20 +221,51 @@ void Gerenciador::adicionarTripulante(std::string cpf, int codigo)  {
     
     std::map<std::string, Astronauta*>::iterator it2 = this->viajantes.find(cpf);
     
-    if (it2 != this->viajantes.end() && it2->second->getDisponivel())  {
-      it1->second->adicionarPassageiro(it2->second);
-      it2->second->toggleDisponivel();
-      it2->second->adicionarVoo(codigo);
+    if (it2 != this->viajantes.end() && it2->second->getAlive())  {
 
-      std::cout << "\n\033[32;1mAstronauta adicionado ao voo com sucesso!\033[m" << std::endl;
+      if (it1->second->checkPassageiros(cpf))  {
+        std::cout << "\n\033[33;1mATENÇÃO: Esse astronauta já está vinculado a esse voo\033[m" << std::endl;
+      }
+
+      else {
+        it1->second->adicionarPassageiro(it2->second);
+  
+        std::cout << "\n\033[32;1mAstronauta adicionado ao voo com sucesso!\033[m" << std::endl;
+        std::cout << "\033[34;1mCPF do astronauta:\033[m " << it2->second->getCPF() << std::endl;
+        std::cout << "\033[34;1mCódigo de voo:\033[m " << it1->second->getCodigo() << std::endl;
+      }
+    }
+    else {
+      std::cout << "\n\033[31;1mERRO: Astronauta não encontrado.\033[m" << std::endl;
+    }
+  }
+  else if (it1 == this->viagens.end())  {
+    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+  }
+  else  {
+    std::cout << "\n\033[31;1mERRO: Voo indisponível.\033[m" << std::endl;
+  }
+}
+
+// Remover astronauta de um voo
+void Gerenciador::removerTripulante(std::string cpf, int codigo)  {
+
+  std::map<int, Voo*>::iterator it1 = this->viagens.find(codigo);
+
+  if (it1 != this->viagens.end() && it1->second->getDisponivel())  {
+    
+    if (it1->second->checkPassageiros(cpf))  {
+      
+      std::map<std::string, Astronauta*>::iterator it2 = this->viajantes.find(cpf);
+      
+      it1->second->removerPassageiro(it2->second->getCPF());
+
+      std::cout << "\n\033[32;1mAstronauta removido do voo com sucesso!\033[m" << std::endl;
       std::cout << "\033[34;1mCPF do astronauta:\033[m " << it2->second->getCPF() << std::endl;
       std::cout << "\033[34;1mCódigo de voo:\033[m " << it1->second->getCodigo() << std::endl;
     }
-    else if (it2 == this->viajantes.end())  {
-      std::cout << "\n\033[31;1mERRO: Astronauta não encontrado.\033[m" << std::endl;
-    }
     else {
-      std::cout << "\n\033[31;1mERRO: Astronauta indisponível.\033[m" << std::endl;
+      std::cout << "\n\033[31;1mERRO: Astronauta não encontrado.\033[m" << std::endl;
     }
   }
   else if (it1 == this->viagens.end())  {
