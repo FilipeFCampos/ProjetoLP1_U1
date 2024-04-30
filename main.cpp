@@ -121,8 +121,22 @@ int main(void) {
         }
         break;
 
+      // Lançar um voo
       case 5:
-        {/*Lançar um voo*/}
+        {
+          if (gerenciador.getQtdViagens() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha voos cadastrados.\033[m" << std::endl;
+          }
+          else if (gerenciador.getQtdViajantes() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha astronautas cadastrados.\033[m" << std::endl;
+          }
+          else {
+            int codigo;
+            std::cout << "Digite o código do voo que deseja lançar: ";
+            std::cin >> codigo;
+            gerenciador.lancarVoo(codigo);
+          }
+        }
         break;
 
       case 6:

@@ -30,7 +30,7 @@ class Astronauta {
     bool getDisponivel();
     // Outros
     void morrer();
-    void toggleDisponivel();
+    void setDisponivel(bool set);
     void adicionarVoo(int codigo);
 };
 
@@ -53,10 +53,13 @@ class Voo {
     // Getters
     bool getDisponivel();
     int getCodigo();
+    int getQtdPassageiros();
     // Outros
     void adicionarPassageiro(Astronauta* tripulante);
     void removerPassageiro(std::string cpf);
     void explodir();
+    void setDisponivel(bool set);
+    int decolar();
     int checkPassageiros(std::string CPF);
 };
 
@@ -81,6 +84,7 @@ class Gerenciador  {
     int cadastrarAstronauta(Astronauta *astronauta);
     void adicionarTripulante(std::string CPF, int codigo);
     void removerTripulante(std::string cpf, int codigo);
+    int lancarVoo(int codigo);
 };
 
 #endif
