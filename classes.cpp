@@ -86,6 +86,7 @@ Voo::Voo()  {
   this->passageiros = std::map<std::string, Astronauta*>();
   this->codigo = qtdVoos + 1;
   this->disponivel = true;
+  this->explodido = false;
   qtdVoos++;
 }
 
@@ -94,6 +95,7 @@ Voo::Voo(int codigo)  {
   this->passageiros = std::map<std::string, Astronauta*>();
   this->codigo = codigo;
   this->disponivel = true;
+  this->explodido = false;
   qtdVoos++;
 }
 
@@ -114,8 +116,10 @@ void Voo::removerPassageiro(std::string cpf)  {
 
 // Método para explodir um voo
 void Voo::explodir()  {
-  this->disponivel = false;
 
+  this->explodido = true;
+  this->disponivel = false;
+  
   std::map<std::string, Astronauta*>::iterator it;
 
   for (it = this->passageiros.begin(); it != this->passageiros.end(); it++)  {
@@ -140,7 +144,17 @@ bool Voo::getDisponivel()  {
 
 // Set disponibilidade do voo
 void Voo::setDisponivel(bool set)  {
-  this->disponivel = set;
+  if (this->explodido == false)  {
+    this->disponivel = set;
+  }
+  else  {
+    this->disponivel = false;
+  }
+}
+
+// Get explodido
+bool Voo::getExplodido()  {
+  return this->explodido;
 }
 
 // Lançar este voo
@@ -327,5 +341,30 @@ int Gerenciador::lancarVoo(int codigo)  {
     std::cout << "\n\033[31;1mERRO: Voo indisponível.\033[m" << std::endl;
   }
   
+  return 0;
+}
+
+// Explodir voo
+int Gerenciador::explodirVoo(int codigo)  {
+  
+  std::map<int, Voo*>::iterator it = this->viagens.find(codigo);
+
+  if (it == this->viagens.end())  {
+    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+
+    return 1;
+  }
+
+  if (it->second->getDisponivel() == false)  {
+    it->second->explodir();
+    
+    std::cout << "\n\033[32;1mVoo explodido\033[m" << std::endl;
+    std::cout << "\033[34;1mCódigo de voo:\033[m " << it->second->getCodigo() << std::endl;
+    std::cout << "\033[34;1mNúmero de baixas: \033[m" << it->second->getQtdPassageiros() << std::endl;
+  }
+  else  {
+    std::cout << "\n\033[31;1mERRO: Esse voo ainda não foi lançado.\033[m" << std::endl;
+  }
+
   return 0;
 }

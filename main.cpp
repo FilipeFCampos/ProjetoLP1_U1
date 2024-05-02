@@ -140,7 +140,35 @@ int main(void) {
         break;
 
       case 6:
-        {/*Explodir voo*/}
+        {
+          if (gerenciador.getQtdViagens() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha voos cadastrados.\033[m" << std::endl;
+          }
+          else if (gerenciador.getQtdViajantes() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha astronautas cadastrados.\033[m" << std::endl;
+          }
+          else {
+            int codigo;
+            char confirmacao;
+            
+            std::cout << "Digite o código do voo que deseja explodir: " <<  std::endl;
+            std::cin >> codigo;
+            std::cout << "\n\033[33;1mATENÇÃO: Toda a tripulação do voo vai morrer e o voo se\n         tornará indisponível para sempre.\n\033[m" << std::endl;
+            
+            std::cout << "Tem certeza que deseja continuar? (S/N)" << std::endl;
+            std::cin >> confirmacao;
+  
+            if (confirmacao == 'S' || confirmacao == 's')  {
+              gerenciador.explodirVoo(codigo);
+            }
+            else if (confirmacao == 'N' || confirmacao == 'n')  {
+              std::cout << "\nVoltando ao menu principal...\n" << std::endl;
+            }
+            else {
+              std::cout << "\n\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
+            }
+          }
+        }
         break;
 
       case 7:

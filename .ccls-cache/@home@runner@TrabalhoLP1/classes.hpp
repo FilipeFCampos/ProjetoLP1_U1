@@ -42,6 +42,7 @@ class Voo {
     std::map <std::string, Astronauta*> passageiros;
     int codigo;
     bool disponivel;
+    bool explodido;
     static int qtdVoos;
 
   // Métodos
@@ -52,6 +53,7 @@ class Voo {
     ~Voo();
     // Getters
     bool getDisponivel();
+    bool getExplodido();
     int getCodigo();
     int getQtdPassageiros();
     // Outros
@@ -85,6 +87,7 @@ class Gerenciador  {
     void adicionarTripulante(std::string CPF, int codigo);
     void removerTripulante(std::string cpf, int codigo);
     int lancarVoo(int codigo);
+    int explodirVoo(int codigo);
 };
 
 #endif
