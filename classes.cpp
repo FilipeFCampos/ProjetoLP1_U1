@@ -146,6 +146,12 @@ bool Voo::getDisponivel()  {
 void Voo::setDisponivel(bool set)  {
   if (this->explodido == false)  {
     this->disponivel = set;
+    
+    std::map<std::string, Astronauta*>::iterator it;
+
+    for (it = this->passageiros.begin(); it != this->passageiros.end(); it++)  {
+      it->second->setDisponivel(set);
+    }
   }
   else  {
     this->disponivel = false;
@@ -167,11 +173,7 @@ int Voo::decolar()  {
       return 1;
     }
   }
-  
-  this->disponivel = false;
-  for (it = this->passageiros.begin(); it != this->passageiros.end(); it++)  {
-    it->second->setDisponivel(false);
-  }
+  this->setDisponivel(false);
 
   return 0;
 }
@@ -364,6 +366,34 @@ int Gerenciador::explodirVoo(int codigo)  {
   }
   else  {
     std::cout << "\n\033[31;1mERRO: Esse voo ainda não foi lançado.\033[m" << std::endl;
+  }
+
+  return 0;
+}
+
+// Finalizar voo com sucesso
+int Gerenciador::finalizarVoo(int codigo)  {
+  
+  std::map<int, Voo*>::iterator it = this->viagens.find(codigo);
+
+  if (it == this->viagens.end())  {
+    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+
+    return 1;
+  }
+
+  if (it->second->getDisponivel() == false && it->second->getExplodido() == false)  {
+    it->second->setDisponivel(true);
+
+    std::cout << "\n\033[32;1mVoo aterrissando!\033[m" << std::endl;
+    std::cout << "\033[34;1mCódigo de voo:\033[m " << it->second->getCodigo() << std::endl;
+    std::cout << "\033[34;1mTamanho da tripulacão: \033[m" << it->second->getQtdPassageiros() << std::endl;
+  }
+  else if (it->second->getDisponivel() == true && it->second->getExplodido() == false)  {
+    std::cout << "\n\033[31;1mERRO: Esse voo não foi lançado.\033[m" << std::endl;
+  }
+  else  {
+    std::cout << "\n\033[31;1mERRO: Voo indisponível.\033[m"  << std::endl;
   }
 
   return 0;

@@ -88,6 +88,7 @@ class Gerenciador  {
     void removerTripulante(std::string cpf, int codigo);
     int lancarVoo(int codigo);
     int explodirVoo(int codigo);
+    int finalizarVoo(int codigo);
 };
 
 #endif
