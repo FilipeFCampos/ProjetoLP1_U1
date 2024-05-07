@@ -191,7 +191,14 @@ int main(void) {
         break;
 
       case 8:
-        {/*Listar todos os voos*/}
+        {
+          if (gerenciador.getQtdViagens() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha voos cadastrados.\033[m" << std::endl;
+          }
+          else {
+            gerenciador.listViagens();
+          }
+        }
         break;
 
       case 9:

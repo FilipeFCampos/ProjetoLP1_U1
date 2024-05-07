@@ -398,3 +398,23 @@ int Gerenciador::finalizarVoo(int codigo)  {
 
   return 0;
 }
+
+// Listar todos os voos
+void Gerenciador::listViagens()  {
+  std::map<int, Voo*>::iterator it;
+
+  for (it = this->viagens.begin(); it != this->viagens.end(); it++)  {
+    std::cout << "\033[34;1mVoo: \033[m" << it->second->getCodigo() << "\t\033[34;1mPassageiros: \033[m" 
+    << it->second->getQtdPassageiros() << "\t\033[34;1mStatus: \033[m";
+    
+    if (it->second->getExplodido() == true)  {
+      std::cout << "\033[31;1mExplodido\033[m" << std::endl;
+    }
+    else if (it->second->getDisponivel() == false)  {
+      std::cout << "\033[32;1mVoando\033[m" << std::endl;
+    }
+    else  {
+      std::cout << "\033[33;1mStandby\033[m" << std::endl;
+    }
+  }
+}

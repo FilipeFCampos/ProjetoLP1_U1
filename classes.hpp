@@ -89,6 +89,8 @@ class Gerenciador  {
     int lancarVoo(int codigo);
     int explodirVoo(int codigo);
     int finalizarVoo(int codigo);
+    void listViagens();
+    void listViajantes();
 };
 
 #endif
