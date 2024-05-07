@@ -402,6 +402,7 @@ int Gerenciador::finalizarVoo(int codigo)  {
 // Listar todos os voos
 void Gerenciador::listViagens()  {
   std::map<int, Voo*>::iterator it;
+  std::cout << std::endl;
 
   for (it = this->viagens.begin(); it != this->viagens.end(); it++)  {
     std::cout << "\033[34;1mVoo: \033[m" << it->second->getCodigo() << "\t\033[34;1mPassageiros: \033[m" 
@@ -416,5 +417,29 @@ void Gerenciador::listViagens()  {
     else  {
       std::cout << "\033[33;1mStandby\033[m" << std::endl;
     }
+  }
+}
+
+// Listar todos as fatalidades
+void Gerenciador::listFatalidades()  {
+  std::map<std::string, Astronauta*>::iterator it;
+  int qtdBaixas = 0;
+  std::cout << std::endl;
+
+  for (it = this->viajantes.begin(); it != this->viajantes.end(); it++)  {
+    
+    if (it->second->getAlive() == false)  {
+      std::cout << "\033[34;1mNome: \033[m" << it->second->getNome() << "\t\033[34;1mCPF: \033[m" 
+      << it->second->getCPF() << "\t\033[34;1mIdade: \033[m" << it->second->getIdade() 
+      << "\t\033[31;1mR.I.P\033[m"<< std::endl;
+      
+      qtdBaixas++;
+    }
+  }
+  if (qtdBaixas == 0)  {
+    std::cout << "\033[33;1mNão houveram fatalidades\033[m" << std::endl;
+  }
+  else {
+    std::cout << "\n\033[34;1mTotal de baixas: \033[m" << qtdBaixas << std::endl;
   }
 }

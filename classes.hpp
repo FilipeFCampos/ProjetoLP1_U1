@@ -90,7 +90,7 @@ class Gerenciador  {
     int explodirVoo(int codigo);
     int finalizarVoo(int codigo);
     void listViagens();
-    void listViajantes();
+    void listFatalidades();
 };
 
 #endif

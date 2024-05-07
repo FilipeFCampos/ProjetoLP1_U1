@@ -201,8 +201,16 @@ int main(void) {
         }
         break;
 
+      // Listar fatalidades
       case 9:
-        {/*Listar fatalidades*/}
+        {
+          if (gerenciador.getQtdViajantes() == 0)  {
+            std::cout << "\n\033[31;1mERRO: Nao ha astronautas cadastrados.\033[m" << std::endl;
+          }
+          else {
+            gerenciador.listFatalidades();
+          }
+        }
         break;
       
       // Sair
