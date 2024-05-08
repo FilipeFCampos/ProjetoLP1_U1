@@ -208,7 +208,22 @@ int main(void) {
             std::cout << "\n\033[31;1mERRO: Nao ha astronautas cadastrados.\033[m" << std::endl;
           }
           else {
-            gerenciador.listFatalidades();
+            int check = gerenciador.listFatalidades();
+            if (check) {break;}
+            int escolha;
+            std::cout << "\nDeseja consultar o histórico de voos de algum astronauta?\n" << std::endl;
+            std::cout << "[1] Visualizar histórico de voos" << std::endl;
+            std::cout << "[2] Voltar ao menu principal" << std::endl;
+            std::cin >> escolha;
+            if (escolha == 1)  {
+              std::string CPF;
+              std::cout << "Digite o CPF do astronauta: ";
+              std::cin >> CPF;
+              gerenciador.histVoos(CPF);
+            }
+            else if (escolha != 1 && escolha != 2)  { 
+              std::cout << "\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
+            }
           }
         }
         break;

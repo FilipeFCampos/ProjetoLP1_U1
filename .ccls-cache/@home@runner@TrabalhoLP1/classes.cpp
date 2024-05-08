@@ -58,6 +58,15 @@ bool Astronauta::getDisponivel()  {
   return this->disponivel;
 }
 
+// Exibir histórico de voos
+void Astronauta::getListaVoos()  {
+  std::cout << "\n" << this->getNome() << " participou dos seguintes voos:"  << std::endl;
+
+  for (int i = 0; i < this->listaVoos.size(); i++)  {
+    std::cout << "Voo " << this->listaVoos[i] << std::endl;
+  }
+}
+
 // Função para matar o astronauta
 void Astronauta::morrer()  {
   this->alive = false;
@@ -172,6 +181,9 @@ int Voo::decolar()  {
     if (it->second->getDisponivel() == false)  {
       return 1;
     }
+  }
+  for (it = this->passageiros.begin(); it != this->passageiros.end(); it++)  {
+    it->second->adicionarVoo(this->getCodigo());
   }
   this->setDisponivel(false);
 
@@ -421,7 +433,7 @@ void Gerenciador::listViagens()  {
 }
 
 // Listar todos as fatalidades
-void Gerenciador::listFatalidades()  {
+int Gerenciador::listFatalidades()  {
   std::map<std::string, Astronauta*>::iterator it;
   int qtdBaixas = 0;
   std::cout << std::endl;
@@ -438,8 +450,27 @@ void Gerenciador::listFatalidades()  {
   }
   if (qtdBaixas == 0)  {
     std::cout << "\033[33;1mNão houveram fatalidades\033[m" << std::endl;
+
+    return 1;
   }
   else {
     std::cout << "\n\033[34;1mTotal de baixas: \033[m" << qtdBaixas << std::endl;
   }
+
+  return 0;
+}
+
+// Listar histórico de voos
+int Gerenciador::histVoos(std::string cpf)  {
+  std::map<std::string, Astronauta*>::iterator it = this->viajantes.find(cpf);
+
+  if (it == this->viajantes.end() || it->second->getAlive() == true)  {
+    std::cout << "\n\033[31;1mERRO: Astronauta não encontrado.\033[m" << std::endl;
+
+    return 1;
+  }
+
+  it->second->getListaVoos();
+  
+  return 0;
 }

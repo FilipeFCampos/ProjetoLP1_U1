@@ -28,6 +28,7 @@ class Astronauta {
     int getIdade();
     bool getAlive();
     bool getDisponivel();
+    void getListaVoos();
     // Outros
     void morrer();
     void setDisponivel(bool set);
@@ -90,7 +91,8 @@ class Gerenciador  {
     int explodirVoo(int codigo);
     int finalizarVoo(int codigo);
     void listViagens();
-    void listFatalidades();
+    int listFatalidades();
+    int histVoos(std::string cpf);
 };
 
 #endif
