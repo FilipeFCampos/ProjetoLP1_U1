@@ -197,6 +197,20 @@ int main(void) {
           }
           else {
             gerenciador.listViagens();
+            int escolha;
+            std::cout << "\nDeseja consultar a tripulação de algum voo?\n" << std::endl;
+            std::cout << "[1] Consultar tripulação" << std::endl;
+            std::cout << "[2] Voltar ao menu principal" << std::endl;
+            std::cin >> escolha;
+            if (escolha == 1)  {
+              int codigo;
+              std::cout << "Digite o código de voo: ";
+              std::cin >> codigo;
+              gerenciador.consultarTripulacao(codigo);
+            }
+            else if (escolha != 1 && escolha != 2)  { 
+              std::cout << "\n\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
+            }
           }
         }
         break;

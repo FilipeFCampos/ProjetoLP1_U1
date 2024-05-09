@@ -60,8 +60,9 @@ bool Astronauta::getDisponivel()  {
 }
 
 // Exibir histórico de voos
-void Astronauta::getListaVoos()  {
-  std::cout << "\n" << this->getNome() << " participou dos seguintes voos:"  << std::endl;
+void Astronauta::exibirListaVoos()  {
+  std::cout << "\n\033[34;1m" << this->getNome() 
+  << " participou dos seguintes voos:\033[m" << std::endl;
 
   for (int i = 0; i < this->listaVoos.size(); i++)  {
     std::cout << "Voo " << this->listaVoos[i] << std::endl;
@@ -97,6 +98,7 @@ Voo::Voo()  {
   this->codigo = qtdVoos + 1;
   this->disponivel = true;
   this->explodido = false;
+  this->finalizado = false;
   qtdVoos++;
 }
 
@@ -106,6 +108,7 @@ Voo::Voo(int codigo)  {
   this->codigo = codigo;
   this->disponivel = true;
   this->explodido = false;
+  this->finalizado = false;
   qtdVoos++;
 }
 
@@ -152,6 +155,11 @@ bool Voo::getDisponivel()  {
   return this->disponivel;
 }
 
+// Get finalizado
+bool Voo::getFinalizado()  {
+  return this->finalizado;
+}
+
 // Set disponibilidade do voo
 void Voo::setDisponivel(bool set)  {
   if (this->explodido == false)  {
@@ -166,6 +174,11 @@ void Voo::setDisponivel(bool set)  {
   else  {
     this->disponivel = false;
   }
+}
+
+// Set finalizado
+void Voo::setFinalizado(bool set)  {
+  this->finalizado = set;
 }
 
 // Get explodido
@@ -194,6 +207,19 @@ int Voo::decolar()  {
 // Get quantidade de passageiros
 int Voo::getQtdPassageiros()  {
   return this->passageiros.size();
+}
+
+// Exibir tripulação
+void Voo::exibirTripulacao()  {
+  std::map<std::string, Astronauta*>::iterator it;
+
+  std::cout << "\n\033[34;1mNome:           CPF:            Idade:\033[m" << std::endl;
+
+  for (it = this->passageiros.begin(); it != this->passageiros.end(); it++)  {
+    std::cout << std::left << std::setw(16) << it->second->getNome();
+    std::cout << std::setw(16) << it->second->getCPF();
+    std::cout << std::setw(8) << it->second->getIdade() << std::endl;
+  }
 }
 
 //-------------------------------------------------------------------//
@@ -338,7 +364,7 @@ int Gerenciador::lancarVoo(int codigo)  {
     return 1;
   }
   
-  if (it->second->getQtdPassageiros() >= 1 && it->second->getDisponivel())  {
+  if (it->second->getQtdPassageiros() >= 1 && it->second->getDisponivel() && it->second->getFinalizado() == false)  {
     if (it->second->decolar())  {
       std::cout << "\n\033[31;1mERRO: Voos com astronautas indisponiveis nao podem decolar.\033[m" << std::endl;
       return 2;
@@ -397,6 +423,7 @@ int Gerenciador::finalizarVoo(int codigo)  {
 
   if (it->second->getDisponivel() == false && it->second->getExplodido() == false)  {
     it->second->setDisponivel(true);
+    it->second->setFinalizado(true);
 
     std::cout << "\n\033[32;1mVoo aterrissando!\033[m" << std::endl;
     std::cout << "\033[34;1mCódigo de voo:\033[m " << it->second->getCodigo() << std::endl;
@@ -428,6 +455,9 @@ void Gerenciador::listViagens()  {
     }
     else if (it->second->getDisponivel() == false)  {
       std::cout << "\033[32;1mVoando\033[m" << std::endl;
+    }
+    else if (it->second->getFinalizado() == true)  {
+      std::cout << "\033[32;1mFinalizado\033[m" << std::endl;
     }
     else  {
       std::cout << "\033[33;1mStandby\033[m" << std::endl;
@@ -475,7 +505,22 @@ int Gerenciador::histVoos(std::string cpf)  {
     return 1;
   }
 
-  it->second->getListaVoos();
+  it->second->exibirListaVoos();
   
+  return 0;
+}
+
+// Consultar tripulação de determinado voo
+int Gerenciador::consultarTripulacao(int codigo)  {
+  std::map<int, Voo*>::iterator it = this->viagens.find(codigo);
+
+  if (it == this->viagens.end())  {
+    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+
+    return 1;
+  }
+
+  it->second->exibirTripulacao();
+
   return 0;
 }

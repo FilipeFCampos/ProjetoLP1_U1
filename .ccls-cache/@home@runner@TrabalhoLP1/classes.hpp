@@ -28,8 +28,8 @@ class Astronauta {
     int getIdade();
     bool getAlive();
     bool getDisponivel();
-    void getListaVoos();
     // Outros
+    void exibirListaVoos();
     void morrer();
     void setDisponivel(bool set);
     void adicionarVoo(int codigo);
@@ -44,6 +44,7 @@ class Voo {
     int codigo;
     bool disponivel;
     bool explodido;
+    bool finalizado;
     static int qtdVoos;
 
   // Métodos
@@ -55,13 +56,16 @@ class Voo {
     // Getters
     bool getDisponivel();
     bool getExplodido();
+    bool getFinalizado();
     int getCodigo();
     int getQtdPassageiros();
     // Outros
+    void exibirTripulacao();
     void adicionarPassageiro(Astronauta* tripulante);
     void removerPassageiro(std::string cpf);
     void explodir();
     void setDisponivel(bool set);
+    void setFinalizado(bool set);
     int decolar();
     int checkPassageiros(std::string CPF);
 };
@@ -93,6 +97,7 @@ class Gerenciador  {
     void listViagens();
     int listFatalidades();
     int histVoos(std::string cpf);
+    int consultarTripulacao(int codigo);
 };
 
 #endif
