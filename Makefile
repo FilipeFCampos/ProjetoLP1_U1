@@ -5,13 +5,13 @@ SRCS = classes.o functions.o main.o
 HEADERS = classes.hpp functions.hpp
 
 classes.o: $(HEADERS) classes.cpp
-	$(CXX) $(CXXFLAGS) classes.cpp -c "$@"
+	$(CXX) $(CXXFLAGS) classes.cpp -c
 
 functions.o: $(HEADERS) functions.cpp
-	$(CXX) $(CXXFLAGS) functions.cpp -c "$@"
+	$(CXX) $(CXXFLAGS) functions.cpp -c
 
 main.o: $(HEADERS) main.cpp
-	$(CXX) $(CXXFLAGS) main.cpp -c "$@"
+	$(CXX) $(CXXFLAGS) main.cpp -c
 
 projeto: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@"

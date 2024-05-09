@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <iomanip>
 #include "classes.hpp"
 #include "functions.hpp"
 
@@ -414,12 +415,14 @@ int Gerenciador::finalizarVoo(int codigo)  {
 // Listar todos os voos
 void Gerenciador::listViagens()  {
   std::map<int, Voo*>::iterator it;
-  std::cout << std::endl;
+  
+  std::cout << "\n\033[34;1mVoo:  Tripulação:  Status:\033[m" << std::endl;
 
   for (it = this->viagens.begin(); it != this->viagens.end(); it++)  {
-    std::cout << "\033[34;1mVoo: \033[m" << it->second->getCodigo() << "\t\033[34;1mPassageiros: \033[m" 
-    << it->second->getQtdPassageiros() << "\t\033[34;1mStatus: \033[m";
     
+    std::cout << std::left << std::setw(6) << it->second->getCodigo();
+    std::cout << std::setw(13) << it->second->getQtdPassageiros();
+
     if (it->second->getExplodido() == true)  {
       std::cout << "\033[31;1mExplodido\033[m" << std::endl;
     }
@@ -436,20 +439,22 @@ void Gerenciador::listViagens()  {
 int Gerenciador::listFatalidades()  {
   std::map<std::string, Astronauta*>::iterator it;
   int qtdBaixas = 0;
-  std::cout << std::endl;
 
+  std::cout << "\n\033[34;1mNome:           CPF:            Idade:\033[m" << std::endl;
+  
   for (it = this->viajantes.begin(); it != this->viajantes.end(); it++)  {
-    
+
     if (it->second->getAlive() == false)  {
-      std::cout << "\033[34;1mNome: \033[m" << it->second->getNome() << "\t\033[34;1mCPF: \033[m" 
-      << it->second->getCPF() << "\t\033[34;1mIdade: \033[m" << it->second->getIdade() 
-      << "\t\033[31;1mR.I.P\033[m"<< std::endl;
+      std::cout << std::left << std::setw(16) << it->second->getNome();
+      std::cout << std::setw(16) << it->second->getCPF();
+      std::cout << std::setw(8) << it->second->getIdade();
+      std::cout << "\033[31;1mR.I.P\033[m"<< std::endl;
       
       qtdBaixas++;
     }
   }
   if (qtdBaixas == 0)  {
-    std::cout << "\033[33;1mNão houveram fatalidades\033[m" << std::endl;
+    std::cout << "\n\033[33;1mNão houveram fatalidades\033[m" << std::endl;
 
     return 1;
   }

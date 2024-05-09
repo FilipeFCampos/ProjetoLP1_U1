@@ -222,7 +222,7 @@ int main(void) {
               gerenciador.histVoos(CPF);
             }
             else if (escolha != 1 && escolha != 2)  { 
-              std::cout << "\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
+              std::cout << "\n\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
             }
           }
         }
