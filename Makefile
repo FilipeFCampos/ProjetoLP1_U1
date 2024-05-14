@@ -1,5 +1,5 @@
-CXX = clang++
-override CXXFLAGS += -g -Wall -pedantic -fsanitize=address
+CXX = g++
+override CXXFLAGS += -g -Wall -pedantic
 
 SRCS = classes.o functions.o main.o
 HEADERS = classes.hpp functions.hpp
@@ -16,8 +16,11 @@ main.o: $(HEADERS) main.cpp
 projeto: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@"
 
-projeto-debug: $(SRCS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) -U_FORTIFY_SOURCE -O0 $(SRCS) -o "$@"
-
 clean:
-	rm -f projeto projeto-debug
+	rm -f projeto *.o
+
+clean-projeto:
+	rm -f projeto
+
+clean-obj:
+	rm -f *.o

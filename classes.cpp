@@ -64,7 +64,7 @@ void Astronauta::exibirListaVoos()  {
   std::cout << "\n\033[34;1m" << this->getNome() 
   << " participou dos seguintes voos:\033[m" << std::endl;
 
-  for (int i = 0; i < this->listaVoos.size(); i++)  {
+  for (int i = 0; i < (int)this->listaVoos.size(); i++)  {
     std::cout << "Voo " << this->listaVoos[i] << std::endl;
   }
 }
@@ -238,7 +238,7 @@ void Gerenciador::cadastrarVoo(Voo *voo)  {
   this->viagens.insert({voo->getCodigo(), voo});
   
   std::cout << "\n\033[32;1mVoo cadastrado com sucesso!\033[m" << std::endl;
-  std::cout << "\033[34;1mCódigo de voo:\033[m " << voo->getCodigo() << std::endl;
+  std::cout << "\033[34;1mCodigo de voo:\033[m " << voo->getCodigo() << std::endl;
 }
 
 // Método para cadastrar um novo astronauta
@@ -303,24 +303,24 @@ void Gerenciador::adicionarTripulante(std::string cpf, int codigo)  {
     if (it2 != this->viajantes.end() && it2->second->getAlive())  {
 
       if (it1->second->checkPassageiros(cpf))  {
-        std::cout << "\n\033[33;1mATENÇÃO: Esse astronauta já está vinculado a esse voo\033[m" << std::endl;
+        std::cout << "\n\033[33;1mATENCAO: Esse astronauta ja esta vinculado a esse voo\033[m" << std::endl;
       }
       else {
         it1->second->adicionarPassageiro(it2->second);
         std::cout << "\n\033[32;1mAstronauta adicionado ao voo com sucesso!\033[m" << std::endl;
       }
         std::cout << "\033[34;1mCPF do astronauta:\033[m " << it2->second->getCPF() << std::endl;
-        std::cout << "\033[34;1mCódigo de voo:\033[m " << it1->second->getCodigo() << std::endl;
+        std::cout << "\033[34;1mCodigo de voo:\033[m " << it1->second->getCodigo() << std::endl;
     }
     else {
-      std::cout << "\n\033[31;1mERRO: Astronauta não encontrado.\033[m" << std::endl;
+      std::cout << "\n\033[31;1mERRO: Astronauta nao encontrado.\033[m" << std::endl;
     }
   }
   else if (it1 == this->viagens.end())  {
-    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo nao encontrado.\033[m" << std::endl;
   }
   else  {
-    std::cout << "\n\033[31;1mERRO: Voo indisponível.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo indisponivel.\033[m" << std::endl;
   }
 }
 
@@ -339,17 +339,17 @@ void Gerenciador::removerTripulante(std::string cpf, int codigo)  {
 
       std::cout << "\n\033[32;1mAstronauta removido do voo com sucesso!\033[m" << std::endl;
       std::cout << "\033[34;1mCPF do astronauta:\033[m " << it2->second->getCPF() << std::endl;
-      std::cout << "\033[34;1mCódigo de voo:\033[m " << it1->second->getCodigo() << std::endl;
+      std::cout << "\033[34;1mCodigo de voo:\033[m " << it1->second->getCodigo() << std::endl;
     }
     else {
-      std::cout << "\n\033[31;1mERRO: Astronauta não encontrado.\033[m" << std::endl;
+      std::cout << "\n\033[31;1mERRO: Astronauta nao encontrado.\033[m" << std::endl;
     }
   }
   else if (it1 == this->viagens.end())  {
-    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo nao encontrado.\033[m" << std::endl;
   }
   else  {
-    std::cout << "\n\033[31;1mERRO: Voo indisponível.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo indisponivel.\033[m" << std::endl;
   }
 }
 
@@ -359,7 +359,7 @@ int Gerenciador::lancarVoo(int codigo)  {
   std::map<int, Voo*>::iterator it = this->viagens.find(codigo);
 
   if (it == this->viagens.end())  {
-    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo nao encontrado.\033[m" << std::endl;
 
     return 1;
   }
@@ -372,14 +372,14 @@ int Gerenciador::lancarVoo(int codigo)  {
     
     it->second->decolar();
     std::cout << "\n\033[32;1mVoo decolando!\033[m" << std::endl;
-    std::cout << "\033[34;1mCódigo de voo:\033[m " << it->second->getCodigo() << std::endl;
-    std::cout << "\033[34;1mTamanho da tripulacão: \033[m" << it->second->getQtdPassageiros() << std::endl;
+    std::cout << "\033[34;1mCodigo de voo:\033[m " << it->second->getCodigo() << std::endl;
+    std::cout << "\033[34;1mTamanho da tripulacao: \033[m" << it->second->getQtdPassageiros() << std::endl;
   }
   else if (it->second->getQtdPassageiros() < 1)  {
     std::cout << "\n\033[31;1mERRO: Voo sem passageiros.\033[m" << std::endl;
   }
   else  {
-    std::cout << "\n\033[31;1mERRO: Voo indisponível.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo indisponivel.\033[m" << std::endl;
   }
   
   return 0;
@@ -391,7 +391,7 @@ int Gerenciador::explodirVoo(int codigo)  {
   std::map<int, Voo*>::iterator it = this->viagens.find(codigo);
 
   if (it == this->viagens.end())  {
-    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo nao encontrado.\033[m" << std::endl;
 
     return 1;
   }
@@ -400,11 +400,11 @@ int Gerenciador::explodirVoo(int codigo)  {
     it->second->explodir();
     
     std::cout << "\n\033[32;1mVoo explodido\033[m" << std::endl;
-    std::cout << "\033[34;1mCódigo de voo:\033[m " << it->second->getCodigo() << std::endl;
-    std::cout << "\033[34;1mNúmero de baixas: \033[m" << it->second->getQtdPassageiros() << std::endl;
+    std::cout << "\033[34;1mCodigo de voo:\033[m " << it->second->getCodigo() << std::endl;
+    std::cout << "\033[34;1mNumero de baixas: \033[m" << it->second->getQtdPassageiros() << std::endl;
   }
   else  {
-    std::cout << "\n\033[31;1mERRO: Esse voo ainda não foi lançado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Esse voo ainda nao foi lancado.\033[m" << std::endl;
   }
 
   return 0;
@@ -416,7 +416,7 @@ int Gerenciador::finalizarVoo(int codigo)  {
   std::map<int, Voo*>::iterator it = this->viagens.find(codigo);
 
   if (it == this->viagens.end())  {
-    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo nao encontrado.\033[m" << std::endl;
 
     return 1;
   }
@@ -426,14 +426,14 @@ int Gerenciador::finalizarVoo(int codigo)  {
     it->second->setFinalizado(true);
 
     std::cout << "\n\033[32;1mVoo aterrissando!\033[m" << std::endl;
-    std::cout << "\033[34;1mCódigo de voo:\033[m " << it->second->getCodigo() << std::endl;
-    std::cout << "\033[34;1mTamanho da tripulacão: \033[m" << it->second->getQtdPassageiros() << std::endl;
+    std::cout << "\033[34;1mCodigo de voo:\033[m " << it->second->getCodigo() << std::endl;
+    std::cout << "\033[34;1mTamanho da tripulacao: \033[m" << it->second->getQtdPassageiros() << std::endl;
   }
   else if (it->second->getDisponivel() == true && it->second->getExplodido() == false)  {
-    std::cout << "\n\033[31;1mERRO: Esse voo não foi lançado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Esse voo nao foi lancado.\033[m" << std::endl;
   }
   else  {
-    std::cout << "\n\033[31;1mERRO: Voo indisponível.\033[m"  << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo indisponivel.\033[m"  << std::endl;
   }
 
   return 0;
@@ -443,7 +443,7 @@ int Gerenciador::finalizarVoo(int codigo)  {
 void Gerenciador::listViagens()  {
   std::map<int, Voo*>::iterator it;
   
-  std::cout << "\n\033[34;1mVoo:  Tripulação:  Status:\033[m" << std::endl;
+  std::cout << "\n\033[34;1mVoo:  Tripulacao:  Status:\033[m" << std::endl;
 
   for (it = this->viagens.begin(); it != this->viagens.end(); it++)  {
     
@@ -484,7 +484,7 @@ int Gerenciador::listFatalidades()  {
     }
   }
   if (qtdBaixas == 0)  {
-    std::cout << "\n\033[33;1mNão houveram fatalidades\033[m" << std::endl;
+    std::cout << "\n\033[33;1mNao houveram fatalidades\033[m" << std::endl;
 
     return 1;
   }
@@ -500,7 +500,7 @@ int Gerenciador::histVoos(std::string cpf)  {
   std::map<std::string, Astronauta*>::iterator it = this->viajantes.find(cpf);
 
   if (it == this->viajantes.end() || it->second->getAlive() == true)  {
-    std::cout << "\n\033[31;1mERRO: Astronauta não encontrado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Astronauta nao encontrado.\033[m" << std::endl;
 
     return 1;
   }
@@ -515,7 +515,7 @@ int Gerenciador::consultarTripulacao(int codigo)  {
   std::map<int, Voo*>::iterator it = this->viagens.find(codigo);
 
   if (it == this->viagens.end())  {
-    std::cout << "\n\033[31;1mERRO: Voo não encontrado.\033[m" << std::endl;
+    std::cout << "\n\033[31;1mERRO: Voo nao encontrado.\033[m" << std::endl;
 
     return 1;
   }

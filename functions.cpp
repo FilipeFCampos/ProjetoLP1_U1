@@ -59,7 +59,7 @@ void interface() {
   std::cout << "[2]: Cadastrar astronauta" << std::endl;
   std::cout << "[3]: Adicionar astronauta em um voo" << std::endl;
   std::cout << "[4]: Remover astronauta de um voo" << std::endl;
-  std::cout << "[5]: Lançar um voo" << std::endl;
+  std::cout << "[5]: Lancar um voo" << std::endl;
   std::cout << "[6]: Explodir voo" << std::endl;
   std::cout << "[7]: Finalizar um voo" << std::endl;
   std::cout << "[8]: Listar todos os voos" << std::endl;

@@ -132,7 +132,7 @@ int main(void) {
           }
           else {
             int codigo;
-            std::cout << "Digite o código do voo que deseja lançar: ";
+            std::cout << "Digite o codigo do voo que deseja lancar: ";
             std::cin >> codigo;
             gerenciador.lancarVoo(codigo);
           }
@@ -152,9 +152,9 @@ int main(void) {
             int codigo;
             char confirmacao;
             
-            std::cout << "Digite o código do voo que deseja explodir: " <<  std::endl;
+            std::cout << "Digite o codigo do voo que deseja explodir: " <<  std::endl;
             std::cin >> codigo;
-            std::cout << "\n\033[33;1mATENÇÃO: Esse voo e toda a sua tripulação vão\n         ficar indisponíveis para sempre.\n\033[m" << std::endl;
+            std::cout << "\n\033[33;1mATENCAO: Esse voo e toda a sua tripulacao vao\n         ficar indisponiveis para sempre.\n\033[m" << std::endl;
             
             std::cout << "Tem certeza que deseja continuar? (S/N)" << std::endl;
             std::cin >> confirmacao;
@@ -183,7 +183,7 @@ int main(void) {
           }
           else {
             int codigo;
-            std::cout << "Digite o código do voo que deseja finalizar: ";
+            std::cout << "Digite o codigo do voo que deseja finalizar: ";
             std::cin >> codigo;
             gerenciador.finalizarVoo(codigo); 
           }
@@ -198,13 +198,13 @@ int main(void) {
           else {
             gerenciador.listViagens();
             int escolha;
-            std::cout << "\nDeseja consultar a tripulação de algum voo?\n" << std::endl;
-            std::cout << "[1] Consultar tripulação" << std::endl;
+            std::cout << "\nDeseja consultar a tripulacao de algum voo?\n" << std::endl;
+            std::cout << "[1] Consultar tripulacao" << std::endl;
             std::cout << "[2] Voltar ao menu principal" << std::endl;
             std::cin >> escolha;
             if (escolha == 1)  {
               int codigo;
-              std::cout << "Digite o código de voo: ";
+              std::cout << "Digite o codigo de voo: ";
               std::cin >> codigo;
               gerenciador.consultarTripulacao(codigo);
             }
@@ -225,8 +225,8 @@ int main(void) {
             int check = gerenciador.listFatalidades();
             if (check) {break;}
             int escolha;
-            std::cout << "\nDeseja consultar o histórico de voos de algum astronauta?\n" << std::endl;
-            std::cout << "[1] Visualizar histórico de voos" << std::endl;
+            std::cout << "\nDeseja consultar o historico de voos de algum astronauta?\n" << std::endl;
+            std::cout << "[1] Visualizar historico de voos" << std::endl;
             std::cout << "[2] Voltar ao menu principal" << std::endl;
             std::cin >> escolha;
             if (escolha == 1)  {
@@ -255,7 +255,7 @@ int main(void) {
             return 0;
           }
           else if (confirmacao == 'N' || confirmacao == 'n')  {
-            std::cout << "\nVoltando ao menu principal...\n" << std::endl;
+            std::cout << "\n\033[33;1mVoltando ao menu principal...\033[m" << std::endl;
           }
           else {
             std::cout << "\n\033[31;1mERRO: Opcao invalida.\033[m" << std::endl;
