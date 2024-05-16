@@ -5,10 +5,6 @@
 
 std::string gerarCPF();
 
-void fatalidades();
-
-void listarVoos();
-
 void interface();
 
 #endif

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ctime>
-#include "functions.hpp"
-#include "classes.hpp"
+#include "./libraries/functions.hpp"
 
 std::string gerarCPF() { 
   
@@ -45,11 +44,6 @@ std::string gerarCPF() {
 
   
   return CPF; 
-}
-
-
-void fatalidades()  {
-  
 }
 
 

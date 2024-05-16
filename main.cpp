@@ -1,6 +1,6 @@
 #include <iostream>
-#include "classes.hpp"
-#include "functions.hpp"
+#include "./libraries/classes.hpp"
+#include "./libraries/functions.hpp"
 
 int main(void) {
 
