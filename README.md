@@ -3,3 +3,10 @@
 #### Trata-se de um sistema de gerenciamento de viagens espaciais desenvolvido na linguagem C++
 #### Nesse projeto foram muito utilizadas as estruturas de dados presentes na biblioteca STD como
 #### o std::map e o std::vector. Sinta-se livre para baixar e testar esse projeto por conta própria!
+.    _     *       \|/   .       .      -*-              +  
+  .' \\`.     +    -*-     *   .         '       .   *      
+. |__''_|  .       /|\ +         .    +       .           | 
+  |     | .                                        .     -*-
+  |     |           `  .    '             . *   .    +    | 
+_.'-----'-.__    *                  .
+/          AEB\__.__.--._______________
