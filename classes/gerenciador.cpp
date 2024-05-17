@@ -250,8 +250,21 @@ int Gerenciador::listFatalidades()  {
   std::map<std::string, Astronauta*>::iterator it;
   int qtdBaixas = 0;
 
-  std::cout << "\n\033[34;1mNome:           CPF:            Idade:\033[m" << std::endl;
+  for (it = this->viajantes.begin(); it != this->viajantes.end(); it++) {
+    if (it->second->getAlive() == false)  {
+      qtdBaixas++;
+    }
+  }
   
+  if (qtdBaixas == 0)  {
+    std::cout << "\n\033[33;1mNao houveram fatalidades\033[m" << std::endl;
+
+    return 1;
+  }
+
+  std::cout << "\n\033[34;1mNome:           CPF:            Idade:\033[m" << std::endl;
+
+
   for (it = this->viajantes.begin(); it != this->viajantes.end(); it++)  {
 
     if (it->second->getAlive() == false)  {
@@ -259,18 +272,9 @@ int Gerenciador::listFatalidades()  {
       std::cout << std::setw(16) << it->second->getCPF();
       std::cout << std::setw(8) << it->second->getIdade();
       std::cout << "\033[31;1mR.I.P\033[m"<< std::endl;
-      
-      qtdBaixas++;
     }
   }
-  if (qtdBaixas == 0)  {
-    std::cout << "\n\033[33;1mNao houveram fatalidades\033[m" << std::endl;
-
-    return 1;
-  }
-  else {
-    std::cout << "\n\033[34;1mTotal de baixas: \033[m" << qtdBaixas << std::endl;
-  }
+  std::cout << "\n\033[34;1mTotal de baixas: \033[m" << qtdBaixas << std::endl;
 
   return 0;
 }
@@ -298,6 +302,12 @@ int Gerenciador::consultarTripulacao(int codigo)  {
     std::cout << "\n\033[31;1mERRO: Voo nao encontrado.\033[m" << std::endl;
 
     return 1;
+  }
+
+  if (it->second->getQtdPassageiros() == 0) {
+    std::cout << "\n\033[31;1mERRO: Este voo esta vazio.\033[m" << std::endl;
+
+    return 2;
   }
 
   it->second->exibirTripulacao();
