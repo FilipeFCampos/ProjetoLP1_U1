@@ -61,6 +61,7 @@ int main(void) {
             int idade;
             std::cout << "Digite o CPF do astronauta: ";
             std::cin >> CPF;
+            formatCPF(CPF);
             std::cout << "Digite o nome do astronauta: ";
             std::getline(std::cin >> std::ws, nome);
             std::cout << "Digite a idade do astronauta: ";
@@ -93,6 +94,7 @@ int main(void) {
             int codigo;
             std::cout << "Digite o CPF do astronauta que deseja adicionar: ";
             std::cin >> cpf;
+            formatCPF(cpf);
             std::cout << "Digite o codigo do voo que deseja atribuir: ";
             std::cin >> codigo;
             gerenciador.adicionarTripulante(cpf, codigo);
@@ -114,6 +116,7 @@ int main(void) {
             int codigo;
             std::cout << "Digite o CPF do astronauta que deseja remover: ";
             std::cin >> cpf;
+            formatCPF(cpf);
             std::cout << "Digite o codigo do voo do qual deseja remover: ";
             std::cin >> codigo;
             gerenciador.removerTripulante(cpf, codigo);
@@ -233,6 +236,7 @@ int main(void) {
               std::string CPF;
               std::cout << "Digite o CPF do astronauta: ";
               std::cin >> CPF;
+              formatCPF(CPF);
               gerenciador.histVoos(CPF);
             }
             else if (escolha != 1 && escolha != 2)  { 
