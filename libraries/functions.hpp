@@ -5,6 +5,8 @@
 
 std::string gerarCPF();
 
+void formatCPF(std::string &CPF);
+
 void interface();
 
 #endif

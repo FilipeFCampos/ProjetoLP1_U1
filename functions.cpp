@@ -1,7 +1,22 @@
 #include <iostream>
 #include <ctime>
+#include <algorithm>
 #include "./libraries/functions.hpp"
 
+// Formatar a porntuação do CPF
+void formatCPF(std::string &CPF) {
+
+  //Limpar a pontuação do CPF
+  CPF.erase(std::remove(CPF.begin(), CPF.end(), '-'), CPF.end());
+  CPF.erase(std::remove(CPF.begin(), CPF.end(), '.'), CPF.end());
+
+  //Adicionar a pontuação de volta
+  CPF.insert(CPF.size() - 8, 1, '.');
+  CPF.insert(CPF.size() - 5, 1, '.');
+  CPF.insert(CPF.size() - 2, 1, '-');
+}
+
+// Gerar CPF aleatório
 std::string gerarCPF() { 
   
   /*Esse algorítmo de geração de CPF aleatório que eu escrevi 
@@ -42,11 +57,12 @@ std::string gerarCPF() {
     CPF += std::to_string(11 - (digito % 11));
   }
 
+  formatCPF(CPF);
   
   return CPF; 
 }
 
-
+// Imprimir interface de usuário
 void interface() {
   std::cout << "\nSelecione a funcao que deseja realizar:\n" << std::endl;
   std::cout << "[1]: Cadastrar voo" << std::endl;
