@@ -23,10 +23,10 @@ projeto: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@"
 
 clean:
-	rm -f projeto *.o
+	rm -f projeto *.o ./classes/*.o
 
 clean-projeto:
 	rm -f projeto
 
 clean-obj:
-	rm -f *.o
+	rm -f *.o ./classes/*.o
