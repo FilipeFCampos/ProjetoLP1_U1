@@ -32,9 +32,9 @@
 *.app
 
 # Test
-test
-tests
-teste
+test*
+tests*
+teste*
 
 # Vscode
 .vscode

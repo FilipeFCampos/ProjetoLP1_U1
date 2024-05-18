@@ -1,8 +1,11 @@
 CXX = g++
 override CXXFLAGS += -g -Wall -pedantic
 
-SRCS = ./classes/astronauta.o ./classes/voo.o ./classes/gerenciador.o functions.o main.o
-HEADERS = ./libraries/classes.hpp ./libraries/functions.hpp
+SRCS = ./classes/astronauta.o ./classes/voo.o ./classes/gerenciador.o ./name_generator-v1.0/name_generator.o functions.o main.o
+HEADERS = ./libraries/classes.hpp ./libraries/functions.hpp ./libraries/name_generator.hpp
+
+name_generator.o: $(HEADERS) ./name_generator-v1.0/name_generator.cpp
+	$(CXX) $(CXXFLAGS) name_generator.cpp -c
 
 astronauta.o: $(HEADERS) ./classes/astronauta.cpp
 	$(CXX) $(CXXFLAGS) astronauta.cpp -c

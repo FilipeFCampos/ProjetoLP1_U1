@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../libraries/classes.hpp"
 #include "../libraries/functions.hpp"
+#include "../libraries/name_generator.hpp"
 
 //------------------------------------------------------------------//
 /*A partir daqui estão implementados os métodos da classe Astronauta*/
@@ -9,8 +10,8 @@
 // Construtor padrão de Astronauta
 Astronauta::Astronauta() {
   this->CPF = gerarCPF();
-  this->nome = "Filipe Campos";
-  this->idade = 20 + rand() % 60;
+  this->nome = gerarNome();
+  this->idade = 20 + rand() % 50;
   this->alive = true;
   this->disponivel = true;
   this->listaVoos = std::vector<int>();
