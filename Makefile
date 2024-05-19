@@ -1,10 +1,10 @@
 CXX = g++
 override CXXFLAGS += -g -Wall -pedantic
 
-SRCS = ./classes/astronauta.o ./classes/voo.o ./classes/gerenciador.o ./name_generator-v1.0/name_generator.o functions.o main.o
+SRCS = ./classes/astronauta.o ./classes/voo.o ./classes/gerenciador.o ./name_generator-v1.2/name_generator.o functions.o main.o
 HEADERS = ./libraries/classes.hpp ./libraries/functions.hpp ./libraries/name_generator.hpp
 
-name_generator.o: $(HEADERS) ./name_generator-v1.0/name_generator.cpp
+name_generator.o: $(HEADERS) ./name_generator-v1.2/name_generator.cpp
 	$(CXX) $(CXXFLAGS) name_generator.cpp -c
 
 astronauta.o: $(HEADERS) ./classes/astronauta.cpp
@@ -26,10 +26,10 @@ projeto: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@"
 
 clean:
-	rm -f projeto *.o ./classes/*.o ./name_generator-v1.0/*.o
+	rm -f projeto *.o ./classes/*.o ./name_generator-*/*.o
 
 clean-projeto:
 	rm -f projeto
 
 clean-obj:
-	rm -f *.o ./classes/*.o ./name_generator-v1.0/*.o
+	rm -f *.o ./classes/*.o ./name_generator-*/*.o

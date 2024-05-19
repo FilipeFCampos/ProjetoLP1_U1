@@ -9,18 +9,24 @@ std::string gerarNome() {
     std::string nome;
     std::ifstream file;
 
-    file.open("./name_generator-v1.0/nomes.txt", std::ios::in);
+    srand(time(0));
+    int genero = rand() % 2;
+
+    if (genero) {
+        file.open("./name_generator-v1.2/nomes_fem.txt", std::ios::in);
+    }
+    else    {
+        file.open("./name_generator-v1.2/nomes_masc.txt", std::ios::in);
+    }
 
     if (file.is_open()) {
 
-        std::srand(std::time(0));
-        int n_linha = rand() % 501;
+        int n_linha = rand() % 251;
 
         nome = GotoLine(file, n_linha);
     }
     else    {
-        //KKKKKKKKKKKKKKKKKKK
-        return "Isaac Franco";
+        return "ERRO";
     }
 
     file.close();
