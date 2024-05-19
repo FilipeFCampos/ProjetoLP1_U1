@@ -26,10 +26,10 @@ projeto: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@"
 
 clean:
-	rm -f projeto *.o ./classes/*.o
+	rm -f projeto *.o ./classes/*.o ./name_generator-v1.0/*.o
 
 clean-projeto:
 	rm -f projeto
 
 clean-obj:
-	rm -f *.o ./classes/*.o
+	rm -f *.o ./classes/*.o ./name_generator-v1.0/*.o
