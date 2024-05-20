@@ -62,7 +62,7 @@ void Astronauta::exibirListaVoos()  {
   std::cout << "\n\033[34;1m" << this->getNome() 
   << " participou dos seguintes voos:\033[m" << std::endl;
 
-  for (int i = 0; i < (int)this->listaVoos.size(); i++)  {
+  for (unsigned int i = 0; i < this->listaVoos.size(); i++)  {
     std::cout << "Voo " << this->listaVoos[i] << std::endl;
   }
 }
