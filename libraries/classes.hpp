@@ -87,7 +87,7 @@ class Gerenciador  {
     int getQtdViagens();
     int getQtdViajantes();
     // Outros
-    void cadastrarVoo(Voo *voo);
+    int cadastrarVoo(Voo *voo);
     int cadastrarAstronauta(Astronauta *astronauta);
     void adicionarTripulante(std::string CPF, int codigo);
     void removerTripulante(std::string cpf, int codigo);

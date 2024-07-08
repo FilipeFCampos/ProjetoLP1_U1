@@ -42,7 +42,10 @@ int main(void) {
       // Cadastrar voo
       case 1:
         {
-          Voo *voo = new Voo();
+          int codigo;
+          std::cout << "Digite o codigo do voo: ";
+          std::cin >> codigo;
+          Voo *voo = new Voo(codigo);
           gerenciador.cadastrarVoo(voo);
         }
         break;

@@ -13,12 +13,21 @@ Gerenciador::Gerenciador()  {
 }
 
 // Método para cadastrar um novo voo
-void Gerenciador::cadastrarVoo(Voo *voo)  {
+int Gerenciador::cadastrarVoo(Voo *voo)  {
+
+  if (this->viagens.count(voo->getCodigo()))  {
+    std::cout << "\n\033[31;1mERRO: Codigo de voo ja utilizado.\033[m" << std::endl;
+    delete voo;
+
+    return 1;
+  }
   
   this->viagens.insert({voo->getCodigo(), voo});
   
   std::cout << "\n\033[32;1mVoo cadastrado com sucesso!\033[m" << std::endl;
   std::cout << "\033[34;1mCodigo de voo:\033[m " << voo->getCodigo() << std::endl;
+
+  return 0;
 }
 
 // Método para cadastrar um novo astronauta

@@ -38,3 +38,8 @@ teste*
 
 # Vscode
 .vscode
+
+# Replit
+.replit
+.ccls-cache
+.git
